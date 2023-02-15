@@ -2,14 +2,43 @@ package main
 
 import (
 	"fmt"
+	"unsafe"
 	//"github.com/gin-gonic/gin"
 )
 
 // a := 1
 var a = 1
 
+type print interface {
+	print_v()
+	//print_k()
+}
+type pen struct {
+	name string
+}
+
+func (r *pen) print_v() {
+	fmt.Println(r.name)
+}
+
+//func (r *pen)print_k(){
+//	fmt.Println(r.name)
+//}
+
 func main() {
-	//fmt.Println(a)
+
+	var v print = &pen{" pen"}
+	v.print_v()
+
+	i := 0
+	var c = 'a'
+	p := &c
+	fmt.Println(unsafe.Sizeof(i), " , ", unsafe.Sizeof(p))
+
+	fmt.Println(unsafe.Sizeof("UESTC"))
+	fmt.Println(unsafe.Sizeof("电子科技大学"))
+	fmt.Println(len("电子科技大学"))
+	fmt.Println(len("UESTC"))
 
 	b := []byte{}
 
